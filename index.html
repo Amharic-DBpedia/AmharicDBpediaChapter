@@ -2,71 +2,215 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8" />
-  <meta
-    name="viewport"
-    content="width=device-width, initial-scale=1"
-  />
-  <title>DBpedia Amharic Chapter</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>DBpedia Resource Viewer</title>
 
-  <!-- Google Font for Ethiopic (optional; remove if hosting locally) -->
-  <link href="css/font.css" rel="stylesheet">
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet"/>
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js" defer></script>
 
-  <!-- Bootstrap CSS (CDN) -->
-  <link
-    href="css/bootstrap.min.css"
-    rel="stylesheet"
-  />
-
-  <!-- Your custom styles -->
-  <link rel="stylesheet" href="css/style.css" />
+  <style>
+    body {
+      font-family: 'Noto Sans Ethiopic', Arial, sans-serif;
+      background-color: white;
+      padding-top: 70px;
+    }
+    .main-container { max-width: 960px; margin: 0 auto; }
+    .page-header { padding: 20px; margin-bottom: 20px; text-align: left; }
+    .table-container { margin: 20px; }
+    .footer, .navbar { width: 100%; }
+    .footer { color: #333; padding: 20px; text-align: center; }
+    .footer img { max-height: 30px; margin: 0 10px; }
+    img.inline-img { max-height: 100px; vertical-align: middle; margin-left: 10px; }
+  </style>
 </head>
 <body>
-  <!-- Fixed Header / Navbar -->
-  <nav class="navbar navbar-expand-lg navbar-dark fixed-top">
-    <div class="container-fluid">
-      <a class="navbar-brand" href="#About">DBpedia Amharic</a>
+<nav class="navbar navbar-expand-lg navbar-light bg-light border-bottom">
+  <div class="container-fluid">
+    <a class="navbar-brand" href="#">DBpedia Am</a>
 
-      <button
-        class="navbar-toggler"
-        type="button"
-        data-bs-toggle="collapse"
-        data-bs-target="#navbarNav"
-        aria-controls="navbarNav"
-        aria-expanded="false"
-        aria-label="Toggle navigation"
-      >
-        <span class="navbar-toggler-icon"></span>
+    <div class="dropdown ms-auto">
+      <button class="btn btn-outline-secondary dropdown-toggle" type="button" id="formatDropdown" data-bs-toggle="dropdown" aria-expanded="false">
+        View Raw Data
       </button>
-
-      <div class="collapse navbar-collapse" id="navbarNav">
-        <ul class="navbar-nav ms-auto" id="dynamicMenu"></ul>
-
-        <!-- Language dropdown -->
-        <div class="dropdown ms-3">
-          <button class="btn btn-light dropdown-toggle" type="button" id="langBtn" data-bs-toggle="dropdown" aria-expanded="false">
-            English
-          </button>
-          <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="langBtn" id="langDropdown"></ul>
-        </div>
-
-
-        <!-- Dark/Light toggle -->
-        <!-- <button class="btn btn-outline-light ms-2" id="themeToggle" title="Toggle dark mode">🌙</button> -->
-      </div>
+      <ul class="dropdown-menu" aria-labelledby="formatDropdown">
+        <li><a class="dropdown-item" href="#" onclick="showRawData('turtle')">View Turtle</a></li>
+        <li><a class="dropdown-item" href="#" onclick="showRawData('json')">View JSON</a></li>
+      </ul>
     </div>
-  </nav>
 
-  <!-- Main content rendered by JS -->
-  <main id="app"></main>
+    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+    <div class="collapse navbar-collapse" id="navbarNav">
+      <ul class="navbar-nav ms-auto">
+        <li class="nav-item"><a class="nav-link" href="https://am.dbpedia.data.dice-research.org/ui" target="_blank" rel="noopener">SPARQL Endpoint</a></li>
+      </ul>
+    </div>
+  </div>
+</nav>
 
-  <!-- Bootstrap Bundle with Popper (CDN) -->
-  <script
-    src="js/bootstrap.bundle.min.js"
-    defer
-  ></script>
+<div class="main-container">
+  <div class="page-header">
+    <h3>About: <span id="aboutURI"></span></h3>
+    <p id="descriptionLine"></p>
+  </div>
 
-  <!-- App JS -->
-  <script src="data/content.js" defer></script>
-  <script src="js/app.js" defer></script>
+  <div class="container table-container">
+    <table class="table table-striped">
+      <thead>
+      <tr>
+        <th>Property</th>
+        <th>Object</th>
+      </tr>
+      </thead>
+      <tbody id="results">
+      <tr><td colspan="2">Loading data...</td></tr>
+      </tbody>
+    </table>
+  </div>
+</div>
+
+<div class="footer">
+  <p>Powered by DBpedia Am |
+    <a href="https://am.dbpedia.data.dice-research.org/ui" target="_blank" rel="noopener">SPARQL</a>
+  </p>
+</div>
+
+<script>
+  let resourceURI;
+  if (window.location.hash) {
+    const originalPath = decodeURIComponent(window.location.hash.slice(1));
+    // If you ever want to force the base, uncomment next line:
+    // resourceURI = "http://am.dbpedia.org" + originalPath;
+    resourceURI = originalPath || window.location.href;
+  } else {
+    resourceURI = window.location.href;
+  }
+
+  const endpoint = 'https://am.dbpedia.data.dice-research.org/sparql';
+  const decodedURI = decodeURIComponent(resourceURI);
+
+  // Display current resource safely
+  document.getElementById("aboutURI").textContent = decodedURI;
+
+  const query = `
+    SELECT DISTINCT ?predicate ?object WHERE {
+      <${decodedURI}> ?predicate ?object.
+    } LIMIT 1000
+  `;
+
+  const url = endpoint + '?query=' + encodeURIComponent(query) + '&format=application/sparql-results+json';
+
+  fetch(url)
+    .then(res => res.json())
+    .then(data => {
+      const tbody = document.getElementById("results");
+      tbody.innerHTML = "";
+
+      if (!data || !data.results || data.results.bindings.length === 0) {
+        tbody.innerHTML = `<tr><td colspan="2">No data found for this resource.</td></tr>`;
+        return;
+      }
+
+      const grouped = {};
+      let entityType = "";
+
+      data.results.bindings.forEach(row => {
+        const predURI = row.predicate.value;
+        const predLabel = predURI.split('/').pop();
+        const obj = row.object;
+
+        if (predLabel === "type" && entityType === "" && obj && obj.value) {
+          entityType = obj.value.split('/').pop();
+        }
+
+        let objDisplay = "";
+        if (obj.type === "uri") {
+          const label = decodeURIComponent(obj.value.split('/').pop().replace(/_/g, ' '));
+          const isImage = /\.(jpg|jpeg|png|gif|svg)(\?.*)?$/i.test(obj.value);
+          if (isImage) {
+            objDisplay = `<a href="${obj.value}" target="_blank" rel="noopener"><img src="${obj.value}" class="inline-img" alt="Image"></a>`;
+          } else {
+            objDisplay = `<a href="${obj.value}" target="_blank" rel="noopener">${label}</a>`;
+          }
+        } else {
+          objDisplay = (obj.value ?? "").toString();
+        }
+
+        if (!grouped[predURI]) {
+          grouped[predURI] = { label: predLabel, values: [] };
+        }
+        grouped[predURI].values.push(objDisplay);
+      });
+
+      document.getElementById("descriptionLine").innerHTML =
+        `An Entity of Type : ${entityType || ""}, from Named Graph :
+         <a href="http://am.dbpedia.org" target="_blank" rel="noopener">http://am.dbpedia.org</a>,
+         within Data Space :
+         <a href="http://am.dbpedia.org" target="_blank" rel="noopener">am.dbpedia.org</a>.`;
+
+      for (const pred in grouped) {
+        const row = grouped[pred];
+        const tr = document.createElement("tr");
+        tr.innerHTML = `
+          <td><a href="${pred}" target="_blank" rel="noopener">${row.label}</a></td>
+          <td>${row.values.join("<br><br><br>")}</td>
+        `;
+        tbody.appendChild(tr);
+      }
+    })
+    .catch(err => {
+      document.getElementById("results").innerHTML =
+        `<tr><td colspan="2">Error loading data</td></tr>`;
+      console.error(err);
+    });
+
+  function showRawData(format) {
+    const formatMap = {
+      turtle: 'text/turtle',
+      json: 'application/ld+json'
+    };
+
+    const describeQuery = `DESCRIBE <${decodedURI}>`;
+    const queryURL = endpoint + '?query=' + encodeURIComponent(describeQuery) +
+      '&format=' + encodeURIComponent(formatMap[format]);
+
+    const previousURL = window.location.href;
+
+    fetch(queryURL)
+      .then(res => res.text())
+      .then(text => {
+        const slug = decodedURI.split('/').pop();
+        const extension = format === 'turtle' ? 'ttl' : 'json';
+        const newPath = window.location.origin + '/data/' + encodeURIComponent(slug) + '.' + extension;
+
+        history.pushState({ previous: previousURL }, '', newPath);
+
+        let displayText = text;
+        if (format === 'json') {
+          try {
+            const parsed = JSON.parse(text);
+            displayText = JSON.stringify(parsed, null, 2);
+          } catch (e) {
+            displayText = 'Failed to parse JSON output.';
+          }
+        }
+
+        // Escape minimal HTML in the display text
+        const escape = s => s.replace(/[&<>]/g, tag => ({'&':'&amp;','<':'&lt;','>':'&gt;'}[tag]));
+
+        document.body.innerHTML = `
+          <div style="padding: 1rem;">
+            <button onclick="history.back()" class="btn btn-secondary mb-3">← Back to Resource View</button>
+            <pre style="white-space: pre-wrap; word-break: break-word;">${escape(displayText)}</pre>
+          </div>`;
+      })
+      .catch(err => {
+        document.body.innerHTML =
+          `<pre style="color: red; padding: 20px;">Failed to load data: ${String(err)}</pre>`;
+        console.error(err);
+      });
+  }
+</script>
 </body>
 </html>
