@@ -28,6 +28,7 @@ The **Amharic DBpedia Chapter** is a community-driven initiative to integrate th
 - **Tentris Endpoint**: [Tentris Endpoint](https://am.dbpedia.data.dice-research.org/ui)
 - **Zenodo DOI**: [10.5281/zenodo.17071765](https://doi.org/10.5281/zenodo.17071765)
 - **Automation**: [DBpedia Automation](https://github.com/Amharic-DBpedia/DBpediaAutomation)
+- **Wiki**: [How to start]([https://github.com/Amharic-DBpedia/DBpediaAutomation](https://github.com/Amharic-DBpedia/AmharicDBpediaChapter/wiki))
 
 ---
 
