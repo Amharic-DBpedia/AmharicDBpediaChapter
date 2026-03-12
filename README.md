@@ -29,8 +29,9 @@ The **Amharic DBpedia Chapter** is a community-driven initiative to integrate th
 - **Zenodo DOI**: [10.5281/zenodo.17071765](https://doi.org/10.5281/zenodo.17071765)
 - **Automation**: [DBpedia Automation](https://github.com/Amharic-DBpedia/DBpediaAutomation)
 - **Wiki**: [How to start](https://github.com/Amharic-DBpedia/AmharicDBpediaChapter/wiki)
-
----
+- **Ethiopian Date Parsers**: [Date Parser](https://github.com/dbpedia/extraction-framework/blob/756787727fd80799cd9ffea98ad2be52942dfb87/core/src/main/scala/org/dbpedia/extraction/config/dataparser/EthiopianDateParserConfig.scala)
+- **Ethiopian - Gregorian calendar**:  [Date Parser 2](https://github.com/dbpedia/extraction-framework/blob/756787727fd80799cd9ffea98ad2be52942dfb87/core/src/main/scala/org/dbpedia/extraction/dataparser/EthiopianDateParser.scala)
+- **Mapping**: [Amharic Maping](https://mappings.dbpedia.org/index.php/Mapping_am)
 
 ## Citation
 
