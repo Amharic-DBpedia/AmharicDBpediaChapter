@@ -40,14 +40,6 @@ If you use this dataset or project, please cite it as:
 
 ---
 
-## Getting Started
-
-1. Visit the [live website](https://am.dbpedia.org) for an overview.
-2. Explore data via the [SPARQL endpoint](https://am.dbpedia.org/sparql).
-3. Download RDF dumps from the [Databus Collection](https://databus.dbpedia.org/purplebee/collections/am_chapter/).
-
----
-
 ## Contributing
 
 We welcome contributions! Please see the [Code of Conduct](CODE_OF_CONDUCT.md) and optionally a future [CONTRIBUTING.md] for details.
