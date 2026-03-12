@@ -26,7 +26,7 @@ The **Amharic DBpedia Chapter** is a community-driven initiative to integrate th
 - **Live Website**: [am.dbpedia.org](https://am.dbpedia.org)
 - **DBpedia Databus Collection**: [Amharic Chapter Collection](https://databus.dbpedia.org/purplebee/collections/am_chapter/)
 - **Tentris Endpoint**: [Tentris Endpoint](https://am.dbpedia.data.dice-research.org/ui)
-- **Zenodo DOI**: [10.5281/zenodo.13357252](https://doi.org/10.5281/zenodo.13357252)
+- **Zenodo DOI**: [10.5281/zenodo.17071765](https://doi.org/10.5281/zenodo.17071765)
 
 ---
 
