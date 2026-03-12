@@ -42,7 +42,7 @@ If you use this dataset or project, please cite it as:
 
 ## Contributing
 
-We welcome contributions! Please see the [Code of Conduct](CODE_OF_CONDUCT.md) and optionally a future [CONTRIBUTING.md] for details.
+We welcome contributions! Please see the [Code of Conduct](CODE_OF_CONDUCT.md) and optionally a future [CONTRIBUTING.md](CONTRIBUTING.md) for details.
 
 ---
 
