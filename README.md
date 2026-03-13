@@ -33,6 +33,7 @@ The **Amharic DBpedia Chapter** is a community-driven initiative to integrate th
 - **Ethiopian - Gregorian calendar**:  [Date Converter](https://github.com/dbpedia/extraction-framework/blob/756787727fd80799cd9ffea98ad2be52942dfb87/core/src/main/scala/org/dbpedia/extraction/dataparser/EthiopianDateParser.scala)
 - **Mapping**: [Amharic Maping](https://mappings.dbpedia.org/index.php/Mapping_am)
 - **Arabic - Ge'ez Number Converter**: [Number Converter](https://github.com/dbpedia/extraction-framework/blob/master/core/src/main/scala/org/dbpedia/extraction/dataparser/EthiopianDateParser.scala)
+- **NLLB Translation**: [Translation](https://github.com/Amharic-DBpedia/AmharicDBpediaChapter/tree/main/NLLB)
 
 ## Citation
 
