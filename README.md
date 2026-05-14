@@ -20,7 +20,109 @@ The **Amharic DBpedia Chapter** is a community-driven initiative to integrate th
 - `README.md` – This documentation file.
 
 ---
+##  Example Queries 
+# Example SPARQL Queries
 
+## Retrieve Sample Resources
+
+```sparql
+SELECT ?s
+WHERE {
+  ?s ?p ?o .
+}
+LIMIT 10
+```
+
+---
+
+## Retrieve Amharic Labels
+
+```sparql
+PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
+
+SELECT ?resource ?label
+WHERE {
+  ?resource rdfs:label ?label .
+  FILTER (lang(?label) = "am")
+}
+LIMIT 20
+```
+
+---
+
+## Count RDF Triples
+
+```sparql
+SELECT (COUNT(*) AS ?triples)
+WHERE {
+  ?s ?p ?o .
+}
+```
+
+---
+
+## Information About Debre Birhan
+
+```sparql
+SELECT ?predicate ?object
+WHERE {
+  <http://am.dbpedia.org/resource/ደብረ_ብርሃን> ?predicate ?object .
+}
+LIMIT 100
+```
+
+---
+
+## Information About Haile Selassie
+
+```sparql
+SELECT ?predicate ?object
+WHERE {
+  <http://am.dbpedia.org/resource/ቀዳማዊ_ኃይለ_ሥላሴ> ?predicate ?object .
+}
+LIMIT 100
+```
+
+---
+
+## Haile Selassie — Mother
+
+```sparql
+SELECT ?object
+WHERE {
+  <http://am.dbpedia.org/resource/ቀዳማዊ_ኃይለ_ሥላሴ>
+  <http://am.dbpedia.org/property/እናት> ?object .
+}
+LIMIT 100
+```
+
+---
+
+## Haile Selassie — Date of Birth
+
+```sparql
+SELECT ?object
+WHERE {
+  <http://am.dbpedia.org/resource/ቀዳማዊ_ኃይለ_ሥላሴ>
+  <http://am.dbpedia.org/property/የተወለዱት> ?object .
+}
+LIMIT 100
+```
+
+---
+
+## Haile Selassie — Children
+
+```sparql
+SELECT ?object
+WHERE {
+  <http://am.dbpedia.org/resource/ቀዳማዊ_ኃይለ_ሥላሴ>
+  <http://am.dbpedia.org/property/ልጆች> ?object .
+}
+LIMIT 100
+```
+
+---
 ## Resources
 
 - **Live Website**: [am.dbpedia.org](https://am.dbpedia.org)
