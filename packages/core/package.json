@@ -1,0 +1,19 @@
+{
+  "name": "@amdb/core",
+  "private": true,
+  "version": "1.0.0",
+  "type": "module",
+  "exports": {
+    ".": "./src/index.ts"
+  },
+  "scripts": {
+    "build": "tsc -p tsconfig.json",
+    "test": "vitest run"
+  },
+  "dependencies": {
+    "n3": "^1.26.0"
+  },
+  "devDependencies": {
+    "@types/n3": "^1.26.0"
+  }
+}
