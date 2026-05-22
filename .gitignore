@@ -1,0 +1,8 @@
+node_modules/
+.pnpm-store/
+dist/
+.vite/
+coverage/
+playwright-report/
+test-results/
+*.tsbuildinfo
