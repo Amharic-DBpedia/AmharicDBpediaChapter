@@ -1,0 +1,14 @@
+{
+  "collection": "https://databus.dbpedia.org/purplebee/collections/am_chapter/",
+  "statisticsSource": "infobox-properties.ttl",
+  "datasets": [
+    "labels",
+    "instance-types",
+    "infobox-properties",
+    "mappingbased-literals",
+    "mappingbased-objects-uncleaned",
+    "article-categories",
+    "geo-coordinates",
+    "wikipedia-links"
+  ]
+}
