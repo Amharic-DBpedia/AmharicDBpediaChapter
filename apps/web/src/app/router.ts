@@ -31,6 +31,11 @@ const routes: readonly RouteDefinition[] = [
       import("../routes/datasets.route").then((m) => m.renderDatasets(layout)),
   },
   {
+    pathname: "/news",
+    handler: (_params, _url, layout) =>
+      import("../routes/news.route").then((m) => m.renderNews(layout)),
+  },
+  {
     pathname: "/statistics",
     handler: (_params, _url, layout) =>
       import("../routes/statistics.route").then((m) => m.renderStatistics(layout)),
@@ -91,7 +96,7 @@ export async function dispatch(url: URL, layout: AppLayout): Promise<void> {
     const match = matchPath(route.pathname, url.pathname);
     if (!match) continue;
     await route.handler(match, url, layout);
-    layout.main.focus();
+    layout.main.focus({ preventScroll: true });
     return;
   }
 

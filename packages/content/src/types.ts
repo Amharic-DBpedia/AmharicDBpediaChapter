@@ -46,6 +46,21 @@ export interface ResearchHighlight {
   readonly body: LocalizedText;
 }
 
+export interface NewsLink {
+  readonly label: LocalizedText;
+  readonly href: string;
+}
+
+export interface NewsItem {
+  readonly title: LocalizedText;
+  readonly summary: LocalizedText;
+  readonly category: LocalizedText;
+  readonly publishedAt: string;
+  readonly href: string;
+  readonly actionLabel?: LocalizedText;
+  readonly links?: readonly NewsLink[];
+}
+
 export interface MappingStatistic {
   readonly label: string;
   readonly percentage: string;

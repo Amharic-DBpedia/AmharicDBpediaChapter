@@ -31,8 +31,43 @@ export function renderQuery(layout: AppLayout): void {
     endpointTitle,
     endpoint,
     endpointCopy,
-    externalLink(env.sparqlUi, "Open full Tentris UI"),
+    externalLink(env.sparqlUi, "Open Tentris in a new tab"),
   );
+
+  const tentris = document.createElement("section");
+  tentris.className = "tentris-workspace";
+  const tentrisHeader = document.createElement("div");
+  tentrisHeader.className = "tentris-workspace__header";
+  const tentrisCopy = document.createElement("div");
+  const tentrisEyebrow = document.createElement("p");
+  tentrisEyebrow.className = "eyebrow";
+  tentrisEyebrow.textContent = "Public knowledge graph";
+  const tentrisTitle = document.createElement("h2");
+  tentrisTitle.textContent = "Tentris query workspace";
+  const tentrisDescription = document.createElement("p");
+  tentrisDescription.textContent =
+    "Explore, compose, and run queries directly against the Amharic DBpedia endpoint.";
+  tentrisCopy.append(tentrisEyebrow, tentrisTitle, tentrisDescription);
+  const tentrisExternal = externalLink(env.sparqlUi, "Open in new tab");
+  tentrisExternal.className = "button-link";
+  tentrisHeader.append(tentrisCopy, tentrisExternal);
+
+  const tentrisFrame = document.createElement("iframe");
+  tentrisFrame.className = "tentris-frame";
+  tentrisFrame.src = env.sparqlUi;
+  tentrisFrame.title = "Amharic DBpedia Tentris query interface";
+  tentrisFrame.loading = "eager";
+  tentrisFrame.referrerPolicy = "no-referrer";
+  tentrisFrame.setAttribute("allow", "clipboard-read; clipboard-write");
+
+  const tentrisFallback = document.createElement("p");
+  tentrisFallback.className = "tentris-workspace__fallback";
+  tentrisFallback.append(
+    "If the query workspace does not load, ",
+    externalLink(env.sparqlUi, "open Tentris directly"),
+    ".",
+  );
+  tentris.append(tentrisHeader, tentrisFrame, tentrisFallback);
 
   const workbench = document.createElement("section");
   workbench.className = "sparql-workbench";
@@ -57,7 +92,7 @@ export function renderQuery(layout: AppLayout): void {
   });
   workbench.append(workbenchTitle, textarea, controls, results);
 
-  section.append(title, intro, endpointPanel, workbench);
+  section.append(title, intro, endpointPanel, tentris, workbench);
 
   for (const example of queryExamples) {
     const article = document.createElement("article");

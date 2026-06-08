@@ -4,6 +4,7 @@ import type {
   DatasetArtifact,
   MappingStatistic,
   NavItem,
+  NewsItem,
   QueryExample,
   ResearchHighlight,
   ResourceLink,
@@ -18,6 +19,7 @@ export const languages = {
 
 export const navigation: readonly NavItem[] = [
   { href: "/", label: { en: "Home", am: "መነሻ", de: "Start" } },
+  { href: "/news", label: { en: "News", am: "ዜና", de: "Aktuelles" } },
   { href: "/statistics", label: { en: "Statistics", am: "ስታቲስቲክስ", de: "Statistik" } },
   { href: "/datasets", label: { en: "Datasets", am: "ዳታሴቶች", de: "Datensätze" } },
   { href: "/sparql", label: { en: "SPARQL", am: "SPARQL", de: "SPARQL" } },
@@ -128,6 +130,111 @@ export const researchHighlights: readonly ResearchHighlight[] = [
       am: "Fine-tuned Afro-XLM-R በclass-aware ontology property alignment 92.1% Top-10 accuracy እና 78.8 MRR አግኝቷል።",
       de: "Fine-tuned Afro-XLM-R erreichte 92,1% Top-10 Accuracy und 78,8 MRR.",
     },
+  },
+];
+
+export const newsItems: readonly NewsItem[] = [
+  {
+    title: {
+      en: "A knowledge graph for Amharic presented at LREC 2026",
+      am: "የአማርኛ የእውቀት ግራፍ በLREC 2026 ቀርቧል",
+      de: "Ein Wissensgraph fuer Amharisch auf der LREC 2026 vorgestellt",
+    },
+    summary: {
+      en: 'Hizkiel Mitiku Alemayehu presented "The Amharic DBpedia Chapter: A Knowledge Graph for a Low-Resource Language" at the 15th Language Resources and Evaluation Conference in Palma de Mallorca.',
+      am: 'ሕዝቅኤል ምትኩ አለማየሁ "The Amharic DBpedia Chapter" የተሰኘውን ጽሑፍ በPalma de Mallorca በተካሄደው 15ኛው LREC አቅርቧል።',
+      de: 'Hizkiel Mitiku Alemayehu stellte "The Amharic DBpedia Chapter" auf der 15. Language Resources and Evaluation Conference in Palma de Mallorca vor.',
+    },
+    category: { en: "Research", am: "ምርምር", de: "Forschung" },
+    publishedAt: "2026-05-15",
+    href: "https://lrec.elra.info/lrec2026-main-627",
+    actionLabel: {
+      en: "Read the paper",
+      am: "ጽሑፉን ያንብቡ",
+      de: "Paper lesen",
+    },
+    links: [
+      {
+        label: { en: "LREC paper page", am: "የLREC ጽሑፍ ገጽ", de: "LREC-Paperseite" },
+        href: "https://lrec.elra.info/lrec2026-main-627",
+      },
+      {
+        label: { en: "GitHub resources", am: "የGitHub ምንጮች", de: "GitHub-Ressourcen" },
+        href: "https://github.com/Amharic-DBpedia/",
+      },
+    ],
+  },
+  {
+    title: {
+      en: "Open Amharic DBpedia resources released for reuse",
+      am: "ክፍት የአማርኛ DBpedia ምንጮች ለዳግም አጠቃቀም ተለቀቁ",
+      de: "Offene Amharic-DBpedia-Ressourcen zur Wiederverwendung veroeffentlicht",
+    },
+    summary: {
+      en: "The project publishes the Amharic knowledge graph, extraction assets, chapter resources, public Databus artifacts, and a Tentris query endpoint for exploration.",
+      am: "ፕሮጀክቱ የአማርኛ የእውቀት ግራፍን፣ extraction assets፣ chapter resources፣ Databus artifacts እና Tentris query endpoint ያቀርባል።",
+      de: "Das Projekt veroeffentlicht den Amharic-Wissensgraphen, Extraktionsressourcen, Databus-Artefakte und einen Tentris-Abfrageendpunkt.",
+    },
+    category: { en: "Resources", am: "ምንጮች", de: "Ressourcen" },
+    publishedAt: "2026-05-15",
+    href: "/sparql",
+    actionLabel: {
+      en: "Explore the graph",
+      am: "ግራፉን ይመልከቱ",
+      de: "Graph erkunden",
+    },
+    links: [
+      {
+        label: {
+          en: "Amharic DBpedia GitHub",
+          am: "Amharic DBpedia GitHub",
+          de: "Amharic-DBpedia-GitHub",
+        },
+        href: "https://github.com/Amharic-DBpedia/",
+      },
+      {
+        label: {
+          en: "Tentris query endpoint",
+          am: "Tentris query endpoint",
+          de: "Tentris-Abfrageendpunkt",
+        },
+        href: "https://am.dbpedia.data.dice-research.org/ui",
+      },
+      {
+        label: { en: "Databus collection", am: "Databus collection", de: "Databus-Collection" },
+        href: "https://databus.dbpedia.org/purplebee/collections/am_chapter/",
+      },
+    ],
+  },
+  {
+    title: {
+      en: "GSoC extraction release reaches 528,370 unique triples",
+      am: "የGSoC extraction release 528,370 ልዩ triples ደርሷል",
+      de: "GSoC-Extraktionsrelease erreicht 528.370 eindeutige Tripel",
+    },
+    summary: {
+      en: "The latest chapter release documents complete template mapping coverage and a major increase in mapped property occurrences.",
+      am: "የቅርብ ጊዜው chapter release ሙሉ የtemplate mapping ሽፋንን እና በmapped property occurrences ላይ ከፍተኛ ጭማሪን ያሳያል።",
+      de: "Das aktuelle Chapter-Release dokumentiert vollstaendige Template-Abdeckung und einen deutlichen Anstieg gemappter Property-Vorkommen.",
+    },
+    category: { en: "Release", am: "ሪሊዝ", de: "Release" },
+    publishedAt: "2025-08-20",
+    href: "/statistics",
+    actionLabel: {
+      en: "View statistics",
+      am: "ስታቲስቲክስ ይመልከቱ",
+      de: "Statistik ansehen",
+    },
+    links: [
+      {
+        label: { en: "Statistics dashboard", am: "የስታቲስቲክስ ገጽ", de: "Statistik-Dashboard" },
+        href: "/statistics",
+      },
+      {
+        label: { en: "Published datasets", am: "የታተሙ ዳታሴቶች", de: "Veroeffentlichte Datensaetze" },
+        href: "/datasets",
+      },
+    ],
   },
 ];
 

@@ -1,6 +1,7 @@
-import { chapterMetrics, researchHighlights, resourceLinks } from "@amdb/content";
+import { chapterMetrics, newsItems, researchHighlights, resourceLinks } from "@amdb/content";
 import { pickLocalized } from "@amdb/core";
 import type { AppLayout } from "../app/layout";
+import { renderNewsItem } from "../components/news-item";
 import { clear, externalLink } from "../dom/html";
 import { renderResourceSearch } from "../features/search/resource-search";
 
@@ -78,6 +79,31 @@ export function renderHome(layout: AppLayout): void {
     research.append(article);
   }
 
+  const news = document.createElement("section");
+  news.className = "news-section";
+  news.id = "news";
+  const newsHeader = document.createElement("div");
+  newsHeader.className = "section-heading";
+  const newsCopy = document.createElement("div");
+  const newsEyebrow = document.createElement("p");
+  newsEyebrow.className = "eyebrow";
+  newsEyebrow.textContent = "Chapter updates";
+  const newsHeading = document.createElement("h2");
+  newsHeading.textContent = "Latest news";
+  newsCopy.append(newsEyebrow, newsHeading);
+  const newsArchive = document.createElement("a");
+  newsArchive.className = "button-link";
+  newsArchive.href = "/news";
+  newsArchive.textContent = "View all news";
+  newsHeader.append(newsCopy, newsArchive);
+
+  const newsGrid = document.createElement("div");
+  newsGrid.className = "news-grid";
+  for (const item of newsItems.slice(0, 3)) {
+    newsGrid.append(renderNewsItem(item, language));
+  }
+  news.append(newsHeader, newsGrid);
+
   const resources = document.createElement("section");
   resources.className = "resource-grid";
   const heading = document.createElement("h2");
@@ -101,5 +127,5 @@ export function renderHome(layout: AppLayout): void {
     resources.append(card);
   }
 
-  layout.main.append(hero, metrics, research, resources);
+  layout.main.append(hero, metrics, research, news, resources);
 }
