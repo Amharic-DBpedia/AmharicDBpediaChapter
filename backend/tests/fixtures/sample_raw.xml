@@ -1,0 +1,12 @@
+<mediawiki>
+  <page>
+    <title>ሙከራ</title>
+    <revision>
+      <text>{{የሠዓሊ_መረጃ
+| ስም = ሙከራ
+| image = Example.jpg|thumb|250px
+| ማብራሪያ = &lt;div style="float:right;"&gt;Broken HTML&lt;/div&gt;
+}}</text>
+    </revision>
+  </page>
+</mediawiki>
