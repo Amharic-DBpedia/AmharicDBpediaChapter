@@ -1,0 +1,25 @@
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+html {
+  min-height: 100%;
+}
+
+body {
+  min-height: 100%;
+  margin: 0;
+}
+
+img,
+canvas {
+  max-width: 100%;
+}
+
+button,
+input,
+select {
+  font: inherit;
+}

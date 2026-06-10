@@ -1,0 +1,13 @@
+@prefix sh: <http://www.w3.org/ns/shacl#> .
+@prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+
+# Starter shape for release validation. Extend with chapter-specific constraints
+# once the extraction release process is automated.
+<#ResourceLabelShape>
+  a sh:NodeShape ;
+  sh:targetSubjectsOf rdfs:label ;
+  sh:property [
+    sh:path rdfs:label ;
+    sh:minCount 1 ;
+  ] .

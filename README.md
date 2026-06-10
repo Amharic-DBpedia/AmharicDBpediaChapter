@@ -2,7 +2,7 @@
 [![fair-software.eu](https://img.shields.io/badge/fair--software.eu-%E2%97%8F%E2%97%8F%E2%97%8F%E2%97%8F%E2%97%8F-brightgreen)](https://fair-software.eu)
 [![DOI](https://zenodo.org/badge/DOI/10.5281/zenodo.13357252.svg)](https://zenodo.org/records/17071765)
 
-#  Amharic DBpedia Chapter
+# Amharic DBpedia Chapter
 
 
 ##  Overview
@@ -13,11 +13,39 @@ The **Amharic DBpedia Chapter** is a community-driven initiative to integrate th
 
 ## Repository Contents
 
-- `index.html` – Landing page for the project website.
-- `amDbpediaDump/` – RDF dump files and related resources.
-- `images/` – Icons, logos, and visual assets.
-- `LICENSE` – MIT License.
-- `README.md` – This documentation file.
+- `apps/web/` - vanilla TypeScript chapter website and resource viewer.
+- `packages/core/` - typed RDF, IRI, SPARQL, and graph helpers.
+- `packages/content/` - typed multilingual site content and SPARQL examples.
+- `docs/` - architecture, RDF pipeline, frontend implementation, and contributor docs.
+- `tools/extraction/` - DBpedia extraction, validation, and Databus publication boundary.
+- `amDbpediaDump/` - existing RDF dump artifacts retained as project evidence.
+- `index.html`, `website/`, `js/`, `css/` - legacy static implementation retained during migration.
+
+Current TypeScript routes include `/`, `/statistics`, `/datasets`, `/sparql`,
+`/resource/:title`, `/team`, and `/docs`.
+
+## Development
+
+**Prerequisites:** Node.js v22+ (use `nvm use` if you have [nvm](https://github.com/nvm-sh/nvm) installed) and [pnpm](https://pnpm.io).
+
+```bash
+pnpm install   # also installs Playwright browsers automatically
+pnpm dev
+```
+
+Useful checks:
+
+```bash
+pnpm run typecheck
+pnpm run lint
+pnpm run test
+pnpm run test:e2e   # end-to-end tests (requires Playwright browsers)
+pnpm run build
+```
+
+The TypeScript refactor does not rewrite DBpedia extraction. Extraction remains an
+upstream DBpedia/Scala and Databus operational workflow; this repository implements
+the chapter-facing website, resource viewer, query examples, and documentation.
 
 ---
 ##  Example Queries 
