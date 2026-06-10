@@ -26,8 +26,10 @@ Current TypeScript routes include `/`, `/statistics`, `/datasets`, `/sparql`,
 
 ## Development
 
+**Prerequisites:** Node.js v22+ (use `nvm use` if you have [nvm](https://github.com/nvm-sh/nvm) installed) and [pnpm](https://pnpm.io).
+
 ```bash
-pnpm install
+pnpm install   # also installs Playwright browsers automatically
 pnpm dev
 ```
 
@@ -37,6 +39,7 @@ Useful checks:
 pnpm run typecheck
 pnpm run lint
 pnpm run test
+pnpm run test:e2e   # end-to-end tests (requires Playwright browsers)
 pnpm run build
 ```
 
